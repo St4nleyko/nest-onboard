@@ -1,4 +1,4 @@
-import { IsString, MinLength } from 'class-validator';
+import {IsEnum, IsOptional, IsString, MinLength} from 'class-validator';
 import {ApiProperty, ApiSchema} from "@nestjs/swagger";
 import {PostType} from "../schemas/post.schema";
 @ApiSchema({ name: 'Create Post Schema Requirements',
@@ -9,23 +9,26 @@ export class CreatePostDto {
     @MinLength(1, { message: 'Title must not be empty' })
     @ApiProperty({
         description: 'Required field - min. 1 letter',
-        minimum: 1,
-        default: 1,
+        minLength: 1,
+        default: "Post Placeholder",
     })
     title: string;
 
     @IsString()
+    @IsOptional()
     @MinLength(1, { message: 'Content must not be empty' })
     @ApiProperty({
-        description: 'Required field - min. 1 letter',
-        minimum: 1,
-        default: 1,
-        example: 'priklad textu',
+        description: 'Not required field - min. 1 letter',
+        minLength: 1,
+        default: "Hello Text",
+        example: 'Hello Text',
+        required:false,
     })
 
-    content: string;
+    content?: string;
 
 
-    @ApiProperty({ enum: PostType })
+    @IsEnum(PostType)
+    @ApiProperty({ enum: PostType, example: PostType.Article })
     type: PostType;
 }
