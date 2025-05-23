@@ -15,7 +15,7 @@ async function bootstrap() {
   }));
   const host = '127.0.0.1';
   const port = parseInt( '8000');
-
+  app.enableCors();
   const config = new DocumentBuilder()
       .setTitle('POST MODEL')
       .setDescription('Post swagger')
