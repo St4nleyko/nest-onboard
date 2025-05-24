@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type PostResponse = {
-    id: string;
+    _id: string;
     title: string;
     content: string;
     type: PostResponse.type;
